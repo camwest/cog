@@ -1,4 +1,10 @@
-<div class="content">
-  <p eco-content="string1"></p>
-  <p eco-content="string2"></p>
+<div class="content" eco-editable="about">
+  <p>{{ about.string1 }}</p>
+  <p>{{ about.string2 }}</p>
+
+  <p>Hours of Operation: {{ about.hoursOfOperation }}</p>
+
+  <div class="map">
+    {{ about.mapAddress | ecoMap }}
+  </div>
 </div>
