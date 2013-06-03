@@ -1,6 +1,7 @@
 TODO
 ===
 
+* Multiple contributors
 * Spec out pagination
 * Spec out basic Admin UI
 * Spec out static pages & content management of them
@@ -33,12 +34,9 @@ Attribute Based
 
 * title - page title
 * include - includes an html file, use a relative url
-* posts - iterates through posts, adds a post variable to scope
+* repeat - wrapper around ngRepeat
 (post.url, post.title, post.time, post.content)
-* no-posts - yields only if there are no posts
-* categories - iterates through categories, adds a category variable to
-scope (category.url, category.label)
-* no-categories - yields only if there are no categories
-* archives - iterates thorugh archives, adds an archive variable to
-scope (archive.url, archive.label)
-* no-archives - yields only if there are no archives
+* no="resource" - yields only if there are no #resource
+* paginate="resource" - shows pagination links for the resource based on
+the current page and the number of posts per page
+
