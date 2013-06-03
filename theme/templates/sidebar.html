@@ -1,0 +1,15 @@
+<div id="sidebar">
+  <h2 class="sidebartitle">Categories</h2>
+  <ul class="list-cat">
+    <eco categories>
+      <li><a href="{{ category.url }}>{{ category.label }}</a></li>
+    </eco>
+  </ul>
+
+  <h2 class="sidebartitle">Archives</h2>
+    <ul class="list-archives">
+      <eco archives>
+        <li><a href="{{ archive.url }}">{{ archive.label }}</a></li>
+      </eco>
+    </ul>
+</div>

@@ -1,0 +1,16 @@
+<div id="main">
+  <div id="content">
+    <h1>Main Area</h1>
+    <eco posts>
+      <h1>{{ post.title }}</h1>
+      <h4>Posted on {{ post.time | 'F jS, Y' }}</h4>
+      <p>{{ post.content }}</p>
+    </eco>
+
+    <eco no-posts>
+      <p>Sorry, no posts matched your criteria</p>
+    </eco>
+  </div>
+
+  <eco include="sidebar"></eco>
+</div>
