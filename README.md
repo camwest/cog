@@ -3,6 +3,8 @@
 
 ## TODO
 
+https://trello.com/board/cog/51ad38c71bb704bb47001070
+
 * Multiple contributors
 * Spec out pagination
 * Spec out basic Admin UI
