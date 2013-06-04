@@ -1,11 +1,12 @@
 var express = require('express')
   , fs = require('fs')
   , app = express()
-  , build = require('./lib/build');
+  , build = require('./lib/build')
+  , buildCss = require('./lib/buildCss');
 
 app.use(express.logger());
 app.use('/client/public', express.static(__dirname + '/client/public'));
-app.use('/client/admin', express.static(__dirname + '/client/admin'));
+app.use('/client/admin', express.static(__dirname + '/client/admin/templates'));
 app.use(function(err, req, res, next) {
   console.log(error.stack);
   res.send(500, 'Oops!');
@@ -18,7 +19,18 @@ app.get('/build.js', function(req, res) {
     }
 
     res.setHeader('Content-Type', 'text/javascript; charset=UTF-8');
-    res.send( js );
+    res.send(js);
+  });
+});
+
+app.get('/build.css', function(req, res) {
+  buildCss(function(err, css) {
+    if (err) {
+      throw err;
+    }
+
+    res.setHeader('Content-TYpe', 'text/css; charset=UTF-8');
+    res.send(css);
   });
 });
 
