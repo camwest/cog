@@ -12,7 +12,7 @@ app.use(function(err, req, res, next) {
   res.send(500, 'Oops!');
 });
 
-app.get('/build.js', function(req, res) {
+app.get('/cog.js', function(req, res) {
   buildJs(function(err, js) {
     if (err) {
       throw err;
@@ -23,7 +23,7 @@ app.get('/build.js', function(req, res) {
   });
 });
 
-app.get('/build.css', function(req, res) {
+app.get('/cog.css', function(req, res) {
   buildCss(function(err, css) {
     if (err) {
       throw err;
