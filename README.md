@@ -48,7 +48,7 @@ Example:
 
 ```html
 <div cog-editable="contact">
-  <p>{{ contact.message1 }}</p>
+  <p>{{ t('message1') }}</p>
 </div>
 ```
 
@@ -63,7 +63,7 @@ fields are strings
 
 ```html
 <div cog-editable="location">
-  {{ location.address | cogMap }}
+  {{ t(''address') | cogMap }}
 </div>
 ```
 
