@@ -6,6 +6,7 @@ angular.module('cog').controller('AdminCtrl', ['$scope', 'Site', function($scope
 
     Site.save().then(function() {
       $scope.saving = false;
+      $scope.admin.$setPristine();
     });
   };
 }]);

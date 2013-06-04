@@ -1,8 +1,11 @@
 <div class="admin" ng-controller="AdminCtrl" ng-hide="site.loading">
+  <form name="admin" novalidate>
   <h1>Admin</h1>
 
-  <button ng-click="save()" ng-hide="saving">Save</button>
-  <span ng-show="saving">Saving...</span>
+  <div class="dirty-nav" ng-show="admin.$dirty">
+    <button ng-click="save()" ng-hide="saving">Save</button>
+    <span ng-show="saving">Saving...</span>
+  </div>
 
   <div class="admin-container">
     <h2>Sections</h2>
