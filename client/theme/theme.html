@@ -1,0 +1,19 @@
+<!doctype html>
+<html cog-cms>
+<head>
+  <title>{{ title }}</title>
+  <link cog-stylesheet></link>
+
+  <script src="/client/public/angular.min.js"></script>
+  <script src="/build.js"></script>
+</head>
+
+<body>
+  <div class="content" cog-editable="about">
+    <p>{{ about.string1 }}</p>
+    <p>{{ about.string2 }}</p>
+
+    <p>Hours of Operation: {{ about.hoursOfOperation }}</p>
+  </div>
+</body>
+</html>

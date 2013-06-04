@@ -1,0 +1,1 @@
+web: $BIN index.js
