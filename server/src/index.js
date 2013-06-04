@@ -1,11 +1,11 @@
 var express = require('express')
   , app = express()
-  , cog = require('./src/cog')
-  , sites = require('./src/sites');
+  , cog = require('./services/cog')
+  , sites = require('./services/sites');
 
 app.use(express.logger());
 app.use(express.bodyParser());
-app.use('/client/admin', express.static(__dirname + '/client/admin/templates'));
+app.use('/client/admin', express.static(__dirname + '/../../client/admin/templates'));
 app.use(function(err, req, res, next) {
   console.log(error.stack);
   res.send(500, 'Oops!');

@@ -1,1 +1,1 @@
-web: $BIN index.js
+web: $BIN server/src/index.js

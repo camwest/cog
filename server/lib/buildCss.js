@@ -21,7 +21,7 @@ function buildCss(callback) {
 }
 
 function readCss(dirSuffix, callback) {
-  var dir = __dirname + '/../' + dirSuffix;
+  var dir = __dirname + '/../../' + dirSuffix;
 
   var walker = fse.walk(dir);
   var css = '';

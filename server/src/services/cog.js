@@ -1,5 +1,5 @@
-var buildJs = require('../lib/buildJs')
-  , buildCss = require('../lib/buildCss')
+var buildJs = require('../../lib/buildJs')
+  , buildCss = require('../../lib/buildCss')
   , fs = require('fs');
 
 function js(req, res) {
@@ -26,7 +26,7 @@ function css(req, res) {
 }
 
 function index(req, res) {
-  fs.readFile(__dirname + '/../client/theme/theme.html', function(err, html) {
+  fs.readFile(__dirname + '/../../../client/theme/theme.html', function(err, html) {
     if (err) {
       throw err;
     }

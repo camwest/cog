@@ -19,7 +19,7 @@ function buildJs(callback) {
 
 function readJs(dirSuffix, callback) {
 
-  var dir = __dirname + '/../' + dirSuffix;
+  var dir = __dirname + '/../../' + dirSuffix;
 
 
   var walker = fse.walk(dir);
