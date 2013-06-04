@@ -63,7 +63,7 @@ fields are strings
 
 ```html
 <div cog-editable="location">
-  {{ t(''address') | cogMap }}
+  {{ t('address') | cogMap }}
 </div>
 ```
 
