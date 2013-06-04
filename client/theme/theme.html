@@ -1,20 +1,58 @@
 <!doctype html>
 <html cog-cms>
 <head>
-  <title>{{ title }}</title>
-  <link cog-stylesheet></link>
+  <title>Yo man</title>
 
   <script src="/client/public/jquery-1.10.1.min.js"></script>
   <script src="/client/public/angular.min.js"></script>
   <script src="/build.js"></script>
 </head>
 
-<body>
-  <div class="content" cog-editable="about">
-    <p>{{ about.string1 }}</p>
-    <p>{{ about.string2 }}</p>
+<style>
+  .admin {
+    position: fixed;
+    height: 250px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    color: white;
+    overflow: auto;
+    padding: 10px;
+  }
+</style>
 
-    <p>Hours of Operation: {{ about.hoursOfOperation }}</p>
+<body>
+<div class="admin" ng-controller="AdminCtrl">
+  <h1>Admin</h1>
+
+  <div class="admin-container">
+    <h2>Sections</h2>
+
+    <div ng-repeat="section in sections">
+      <h3>{{ section.label }}</h3>
+
+      <p ng-repeat="field in section.fields">
+        <label>{{ field.label }}</label> <input type="text" ng-model="field.value" />
+      </p>
+    </div>
+  </div>
+</div>
+
+  <div class="content" cog-editable="about">
+    <p>{{ t('string1') }}</p>
+    <p>{{ t('string2') }}</p>
+
+    <p>Hours of Operation: {{ t('Hours of Operation') }}</p>
+  </div>
+
+  <div cog-editable="news">
+    <h1>{{ t('Featured News: Header') }}</h1>
+    <p>{{ t('Featured News: Body') }}</p>
+  </div>
+
+  <div cog-editable="footer">
+    <p>{{ t('copyright') }}</p>
   </div>
 </body>
 </html>
