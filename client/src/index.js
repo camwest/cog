@@ -2,7 +2,10 @@ var cmsRoot = document.querySelector('[cog-cms]');
 
 if (cmsRoot) {
   console.log('cog: Bootstrapping');
-  angular.bootstrap(cmsRoot, ['cog']);
+
+  $(function() {
+    angular.bootstrap(document.documentElement, ['cog']);
+  });
 } else {
   throw 'cog-cms not found';
 }
