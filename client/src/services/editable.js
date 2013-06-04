@@ -1,4 +1,4 @@
-angular.module('cog').factory('Section', function() {
+angular.module('cog').factory('Editable', function() {
   var sections = [
     {
       label: 'about',
