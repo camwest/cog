@@ -1,8 +1,7 @@
 var cog = angular.module('cog', []);
 
 cog.config(['$provide', function($provide) {
-  $provide.constant('cogSettings', {
-  });
+  $provide.constant('cogSettings', window.cog);
 }]);
 
 cog.run(function() {

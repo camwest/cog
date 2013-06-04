@@ -1,9 +1,9 @@
-angular.module('cog').directive('cogEditable', ['Editable', function(Editable) {
+angular.module('cog').directive('cogEditable', ['Site', function(Site) {
   return {
     restrict: 'A',
     scope: {},
     link: function(scope, element, attrs) {
-      Editable.tFunc(attrs.cogEditable, function(t) {
+      Site.tFunc(attrs.cogEditable).then(function(t) {
         scope.t = t;
       });
     }
