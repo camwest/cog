@@ -1,10 +1,10 @@
-angular.module('cog').controller('AdminCtrl', ['$scope', 'Site', function($scope, Site) {
-  $scope.site = Site.load();
+angular.module('cog').controller('AdminCtrl', ['$scope', 'SiteLoader', function($scope, SiteLoader) {
+  $scope.site = SiteLoader.load();
 
   $scope.save = function() {
     $scope.saving = true;
 
-    Site.save().then(function() {
+    SiteLoader.save().then(function() {
       $scope.saving = false;
       $scope.admin.$setPristine();
     });

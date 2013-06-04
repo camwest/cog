@@ -1,94 +1,101 @@
-angular.module('cog').factory('Site', ['cogSettings', '$http', '$q', function(cogSettings, $http, $q) {
-  var url = "/sites/" + cogSettings.site;
-  var site = {};
-  var waitingForLoad = [];
+angular.module('cog').factory('Site', function() {
+  function SectionPresenter(section) {
+    this.label = section.label;
+    this.fields = section.fields;
+  }
 
-  function loadSite() {
-    site.loading = true;
+  SectionPresenter.prototype = {
+    findField: function(label) {
+      var match;
 
-    $http.get(url).then(function(resp) {
-      site.sections = resp.data;
-
-      waitingForLoad.forEach(function(defer) {
-        defer.resolve(site);
+      this.fields.forEach(function(field) {
+        if (field.label === label) {
+          match = field;
+        }
       });
 
-      waitingForLoad = [];
-      site.loading = false;
-    });
-  }
+      return match;
+    },
 
-  function findOrCreateSection(sectionLabel) {
-    var sections = site.sections;
-    var section, i;
+    addField: function(field) {
+      this.fields.push(field);
+    },
 
-    for (i = 0; i < sections.length; i++) {
-      if (sections[i].label === sectionLabel) {
-        section = sections[i];
-        break;
-      }
-    }
+    createField: function(fieldLabel) {
+      var field = { label: fieldLabel, value: '' };
 
-    if (!section) {
-      section = { label: sectionLabel, fields: [] };
-      sections.push(section);
-    }
+      this.addField(field);
 
-    return section;
-  }
+      return field;
+    },
 
-  function findOrCreateField(section, fieldLabel) {
-    var field, i;
+    copy: function(site, fieldLabel) {
+      var field = site.findField(this.label, fieldLabel);
 
-    for (i = 0; i < section.fields.length; i++) {
-      if (section.fields[i].label === fieldLabel) {
-        field = section.fields[i];
-        break;
-      }
-    }
-
-    if (!field) {
-      field = { label: fieldLabel, value: '' };
-      section.fields.push(field);
-    }
-
-    return field;
-  }
-
-  return {
-    load: function() {
-      var defer = $q.defer();
-
-      if (site.sections) {
-        defer.resolve(site);
-      } else if (site.loading) {
-        waitingForLoad.push(defer);
+      if (field) {
+        this.addField(field);
       } else {
-        waitingForLoad.push(defer);
-        loadSite();
+        field = this.createField(fieldLabel);
       }
 
-      return defer.promise;
-    },
-
-    save: function() {
-      return $http.put(url, { sections: site.sections });
-    },
-
-    tFunc: function(sectionLabel, callback) {
-      var defer = $q.defer();
-
-      this.load().then(function() {
-        var section = findOrCreateSection(sectionLabel);
-
-        defer.resolve(function(fieldLabel) {
-          var field = findOrCreateField(section, fieldLabel);
-
-          return field.value;
-        });
-      });
-
-      return defer.promise;
+      return field;
     }
   };
-}]);
+
+  function Site() {
+    this.sections = [];
+  }
+
+  Site.prototype = {
+    // finds section and returns it, or returns undefined
+    findSection: function(label) {
+      var match;
+
+      this.sections.forEach(function(section) {
+        if (section.label === label) {
+          match = section;
+        }
+      });
+
+      if (match) {
+        match = new SectionPresenter(match);
+      }
+
+      return match;
+    },
+
+    // creates a section and returns it
+    createSection: function(label) {
+      var section = { label: label, fields: [] };
+
+      this._addSection(section);
+
+      return this.findSection(label);
+    },
+
+    _addSection: function(section) {
+      this.sections.push(section);
+    },
+
+    findField: function(sectionLabel, fieldLabel) {
+      var section = this.findSection(sectionLabel)
+        , match;
+
+      if (section) {
+        match = section.findField(fieldLabel);
+      }
+
+      return match;
+    },
+
+    isLoaded: function() {
+      return (this.sections.length > 0);
+    },
+
+    findOrCreateSection: function(sectionLabel) {
+      return this.findSection(sectionLabel) || this.createSection(sectionLabel);
+    }
+  };
+
+  return Site;
+});
