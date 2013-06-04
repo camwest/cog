@@ -1,15 +1,15 @@
 <div id="sidebar">
   <h2 class="sidebartitle">Categories</h2>
   <ul class="list-cat">
-    <eco repeat="category in categories">
+    <cog repeat="category in categories">
       <li><a href="{{ category.url }}">{{ category.label }}</a></li>
-    </eco>
+    </cog>
   </ul>
 
   <h2 class="sidebartitle">Archives</h2>
     <ul class="list-archives">
-      <eco repeat="archive in archives">
+      <cog repeat="archive in archives">
         <li><a href="{{ archive.url }}">{{ archive.label }}</a></li>
-      </eco>
+      </cog>
     </ul>
 </div>
