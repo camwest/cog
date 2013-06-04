@@ -1,5 +1,5 @@
 {
-  "defaultPosts": "default",
+  "home": "static_about",
   "stylesheet": "style.css",
   "fileSuffix": ".html"
 }

@@ -73,3 +73,8 @@ an editable section called "Location" which will contain a single field
 which will allow us to store a complex hash representing an address
 instead of simply a string. We can then feed the object to the cogMap
 filter which can output the map visually (depending on user preferences)
+
+
+## Admin views
+
+When a user first logs in to an admin view they will see the following:
