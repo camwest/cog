@@ -1,7 +1,7 @@
 var express = require('express')
   , fs = require('fs')
   , app = express()
-  , build = require('./lib/build')
+  , buildJs = require('./lib/buildJs')
   , buildCss = require('./lib/buildCss');
 
 app.use(express.logger());
@@ -13,7 +13,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.get('/build.js', function(req, res) {
-  build(function(err, js) {
+  buildJs(function(err, js) {
     if (err) {
       throw err;
     }
