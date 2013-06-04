@@ -23,22 +23,6 @@
 </style>
 
 <body>
-<div class="admin" ng-controller="AdminCtrl">
-  <h1>Admin</h1>
-
-  <div class="admin-container">
-    <h2>Sections</h2>
-
-    <div ng-repeat="section in sections">
-      <h3>{{ section.label }}</h3>
-
-      <p ng-repeat="field in section.fields">
-        <label>{{ field.label }}</label> <input type="text" ng-model="field.value" />
-      </p>
-    </div>
-  </div>
-</div>
-
   <div class="content" cog-editable="about">
     <p>{{ t('string1') }}</p>
     <p>{{ t('string2') }}</p>

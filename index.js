@@ -5,6 +5,7 @@ var express = require('express')
 
 app.use(express.logger());
 app.use('/client/public', express.static(__dirname + '/client/public'));
+app.use('/client/admin', express.static(__dirname + '/client/admin'));
 app.use(function(err, req, res, next) {
   console.log(error.stack);
   res.send(500, 'Oops!');
@@ -21,7 +22,7 @@ app.get('/build.js', function(req, res) {
   });
 });
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   fs.readFile(__dirname + '/client/theme/theme.html', function(err, html) {
     if (err) {
       throw err;
