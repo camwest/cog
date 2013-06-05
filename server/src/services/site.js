@@ -26,6 +26,6 @@ module.exports = {
   },
 
   update: function(siteId, update, callback) {
-    Site.findOneAndUpdate({ _id: siteId }, update, callback);
+    model.findOneAndUpdate({ _id: siteId }, update, callback);
   }
 };
