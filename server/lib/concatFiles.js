@@ -4,13 +4,7 @@ var fse = require('fs.extra')
   , async = require('async');
 
 function concatFiles(options, callback) {
-  var fullPaths = [];
-
-  options.paths.forEach(function(path) {
-    fullPaths.push( __dirname + '/../../' + path);
-  });
-
-  async.map(fullPaths, readFiles, combineFiles);
+  async.map(options.paths, readFiles, combineFiles);
 
   function readFiles(dir, callback) {
     var walker = fse.walk(dir);

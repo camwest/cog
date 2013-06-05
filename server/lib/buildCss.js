@@ -1,9 +1,13 @@
 var less = require('less')
   , concatFiles = require('./concatFiles');
 
+function getFullPath(path) {
+  return __dirname + '/../../' + path;
+}
+
 function buildCss(callback) {
   var options = {
-    paths: ['client/admin/stylesheets', 'client/theme/stylesheets'],
+    paths: [getFullPath('client/admin/stylesheets'), getFullPath('client/theme/stylesheets')],
     extensions: ['css', 'less']
   };
 
