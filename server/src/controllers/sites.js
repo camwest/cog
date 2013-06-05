@@ -1,12 +1,16 @@
 var Site = require('../services/site');
 
 function build(req, res) {
-  Site.create(function(err, site) {
+  res.render('new_site');
+}
+
+function create(req, res) {
+  Site.create(req.body.user, function(err, site) {
     if (err) {
-      throw err;
+      res.send(err);
     }
 
-    res.send(site._id);
+    res.render('site', { siteId: site.id });
   });
 }
 
@@ -15,7 +19,7 @@ function show(req, res) {
 
   var sections = Site.fetch(siteId, function(err, site) {
     if (err) {
-      throw err;
+      res.send(err);
     }
 
     res.send(site.sections);
@@ -28,7 +32,7 @@ function put(req, res) {
 
   Site.update(siteId, { sections: sections }, function(err, site) {
     if (err) {
-      throw err;
+      res.send(err);
     }
 
     res.send(site.sections);
@@ -37,6 +41,7 @@ function put(req, res) {
 
 module.exports = {
   build: build,
+  create: create,
   show: show,
   put: put
 };

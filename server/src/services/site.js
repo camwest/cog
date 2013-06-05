@@ -1,35 +1,35 @@
-var mongoose = require('mongoose');
-
-var siteSchema = mongoose.Schema({
-  sections: [sectionSchema]
-});
-
-var sectionSchema = mongoose.Schema({
-  label: String,
-  fields: [fieldSchema]
-});
-
-var fieldSchema = mongoose.Schema({
-  label: String,
-  value: String
-});
-
-var Model = mongoose.model('Site', siteSchema);
+var Site = require('./models').Site
+  , User = require('./models').User;
 
 module.exports = {
-  create: function(callback) {
-    Model.create({}, callback);
+  create: function(userParams, callback) {
+    Site.create({}, function(err, site) {
+      if (err) {
+        callback(err);
+      }
+
+      // add site id to user
+      userParams.siteId = site.id;
+
+      User.create(userParams, function(err, user) {
+        if (err) {
+          callback(err);
+        }
+
+        callback(null, site);
+      });
+    });
   },
 
   fetch: function(siteId, callback) {
-    Model.findById(siteId, callback);
+    Site.findById(siteId, callback);
   },
 
   update: function(siteId, update, callback) {
-    Model.findOneAndUpdate({ _id: siteId }, update, callback);
+    Site.findOneAndUpdate({ _id: siteId }, update, callback);
   },
 
   destroyAll: function(callback) {
-    Model.remove({}, callback);
+    Site.remove({}, callback);
   }
 };

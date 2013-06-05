@@ -5,6 +5,8 @@ var expect = require('expect.js')
 mongoose.connect('mongodb://localhost/cog_test');
 
 describe('Site', function() {
+  var validUser = { username: 'username', password: 'abc123' };
+
   afterEach(function(done) {
     Site.destroyAll(done);
   });
@@ -13,7 +15,7 @@ describe('Site', function() {
     var site;
 
     beforeEach(function(done) {
-      Site.create(function(err, model) {
+      Site.create(validUser, function(err, model) {
         site = model;
         done();
       });
@@ -32,7 +34,7 @@ describe('Site', function() {
     var siteId;
 
     beforeEach(function(done) {
-      Site.create(function(err, model) {
+      Site.create(validUser, function(err, model) {
         siteId = model.id;
         done();
       });
@@ -50,7 +52,7 @@ describe('Site', function() {
     var siteId;
 
     beforeEach(function(done) {
-      Site.create(function(err, model) {
+      Site.create(validUser, function(err, model) {
         siteId = model.id;
         done();
       });
@@ -79,7 +81,7 @@ describe('Site', function() {
     var siteId;
 
     beforeEach(function(done) {
-      Site.create(function(err, model) {
+      Site.create(validUser, function(err, model) {
         siteId = model.id;
         done();
       });

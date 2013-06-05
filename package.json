@@ -6,6 +6,8 @@
 
   "dependencies": {
     "async": "0.2.9",
+    "bcrypt": "0.7.5",
+    "ejs": "*",
     "express": "3.x",
     "fs.extra": "1.2.1",
     "less": "1.4.0-b4",
