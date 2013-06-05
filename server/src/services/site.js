@@ -14,18 +14,22 @@ var fieldSchema = mongoose.Schema({
   value: String
 });
 
-var model = mongoose.model('Site', siteSchema);
+var Model = mongoose.model('Site', siteSchema);
 
 module.exports = {
   create: function(callback) {
-    model.create({}, callback);
+    Model.create({}, callback);
   },
 
   fetch: function(siteId, callback) {
-    model.findById(siteId, callback);
+    Model.findById(siteId, callback);
   },
 
   update: function(siteId, update, callback) {
-    model.findOneAndUpdate({ _id: siteId }, update, callback);
+    Model.findOneAndUpdate({ _id: siteId }, update, callback);
+  },
+
+  destroyAll: function(callback) {
+    Model.remove({}, callback);
   }
 };

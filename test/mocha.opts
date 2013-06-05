@@ -1,3 +1,2 @@
---require expect.js
 --reporter list
 --ui bdd
