@@ -1,7 +1,16 @@
 var express = require('express')
+  , mongoose = require('mongoose')
   , app = express()
-  , cog = require('./services/cog')
-  , sites = require('./services/sites');
+  , cog = require('./controllers/cog')
+  , sites = require('./controllers/sites');
+
+mongoose.connect('mongodb://localhost/cog');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to mongo');
+});
 
 app.use(express.logger());
 app.use(express.bodyParser());
