@@ -7,7 +7,7 @@ function getFullPath(path) {
 
 function buildCss(callback) {
   var options = {
-    paths: [getFullPath('client/admin/stylesheets'), getFullPath('client/theme/stylesheets')],
+    paths: [getFullPath('client/admin/stylesheets'), getFullPath('theme/stylesheets')],
     extensions: ['css', 'less']
   };
 

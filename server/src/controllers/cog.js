@@ -26,7 +26,7 @@ function css(req, res) {
 }
 
 function index(req, res) {
-  fs.readFile(__dirname + '/../../../client/theme/theme.html', function(err, html) {
+  fs.readFile(__dirname + '/../../../theme/theme.html', function(err, html) {
     if (err) {
       throw err;
     }
