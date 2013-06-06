@@ -1,4 +1,4 @@
-angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site', function(cogSettings, $http, $q, Site) {
+angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site', 'Admin', function(cogSettings, $http, $q, Site, Admin) {
   var url = "/sites/" + cogSettings.site;
   var server = new Site();
   var client = new Site();
@@ -41,7 +41,7 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
     },
 
     save: function() {
-      return $http.put(url, { sections: client.sections });
+      return $http.put(url, { sections: client.sections }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
     tFunc: function(sectionLabel, callback) {

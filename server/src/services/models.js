@@ -28,7 +28,15 @@ userSchema.methods.newToken = function(callback) {
   require('crypto').randomBytes(48, function(ex, buf) {
     var token = buf.toString('hex');
 
-    doc.update({ token: token }, callback);
+    doc.update({ token: token }, function(err) {
+      if (err) {
+        return callback(err);
+      }
+
+      doc.token = token;
+
+      callback(null, doc);
+    });
   });
 };
 

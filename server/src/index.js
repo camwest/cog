@@ -18,17 +18,17 @@ app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 app.use(express.bodyParser());
 app.use('/client/admin', express.static(__dirname + '/../../client/admin/templates'));
+
 app.use(function(err, req, res, next) {
-  console.log(error.stack);
+  console.log(err.stack);
   res.send(500, 'Oops!');
 });
-
 
 // COG: Sites
 app.get('/sites/new', sites.build);
 app.post('/sites', sites.create);
 app.get('/sites/:id', sites.show);
-app.put('/sites/:id', sites.put);
+app.put('/sites/:id', auth.editorRequired, sites.put);
 
 // COG: Authentication
 app.post('/sites/:id/auth', auth.create);

@@ -36,6 +36,24 @@ angular.module('cog').factory('Admin', ['$http', 'cogSettings', '$rootScope', fu
     logout: function() {
       localStorage.removeItem('cog:user');
       templateUrl = '/client/admin/logged_out.html';
+    },
+
+    getHeaders: function() {
+      return { 'Authorization': 'Token token="' + user.token + '"' };
+    },
+
+    httpError: function(message) {
+      var self = this;
+
+      return function(serverMessage) {
+        console.error('cog: ' + serverMessage);
+
+        if (message) {
+          alert(message + '. Please login again');
+        }
+
+        self.logout();
+      };
     }
   };
 }]);
