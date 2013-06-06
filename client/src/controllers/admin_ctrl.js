@@ -1,12 +1,21 @@
-angular.module('cog').controller('AdminCtrl', ['$scope', 'SiteLoader', function($scope, SiteLoader) {
-  $scope.site = SiteLoader.load();
+angular.module('cog').controller('AdminCtrl', ['$scope', 'Admin', function($scope, Admin) {
+  $scope.getTemplate = Admin.getTemplate;
+  $scope.login = function(credentials) {
+    $scope.validationMessage = '';
+    $scope.validating = true;
 
-  $scope.save = function() {
-    $scope.saving = true;
+    Admin.login(credentials).error(failed).always(stopValidating);
 
-    SiteLoader.save().then(function() {
-      $scope.saving = false;
-      $scope.admin.$setPristine();
-    });
+    function stopValidating() {
+      $scope.validating = false;
+    }
+
+    function failed(message) {
+      $scope.validationMessage = message;
+    }
+  };
+
+  $scope.logout = function() {
+    Admin.logout();
   };
 }]);

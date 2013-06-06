@@ -18,8 +18,25 @@ var fieldSchema = Schema({
 var userSchema = Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
+  token: String,
   siteId: { type: Schema.Types.ObjectId, ref: 'Site', required: true }
 });
+
+userSchema.methods.newToken = function(callback) {
+  var doc = this;
+
+  require('crypto').randomBytes(48, function(ex, buf) {
+    var token = buf.toString('hex');
+
+    doc.update({ token: token }, function(err, doc) {
+      if (err) {
+        throw err;
+      }
+
+      callback(null, token);
+    });
+  });
+};
 
 userSchema.plugin(require('./hashedPasswordPlugin'));
 

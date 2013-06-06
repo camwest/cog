@@ -1,0 +1,24 @@
+<div ng-controller="LoggedInAdminCtrl">
+  <form name="admin" novalidate>
+    <h1>Admin</h1>
+    <a ng-click="logout()">Logout</a>
+
+    <div class="dirty-nav" ng-show="admin.$dirty">
+      <button ng-click="save()" ng-hide="saving">Save</button>
+      <span ng-show="saving">Saving...</span>
+    </div>
+
+    <div class="admin-container">
+      <h2>Sections</h2>
+
+      <div ng-repeat="section in site.sections">
+        <h3>{{ section.label }}</h3>
+
+        <p ng-repeat="field in section.fields">
+          <label>{{ field.label }}</label> <input type="text" ng-model="field.value" />
+        </p>
+      </div>
+    </div>
+  </form>
+</div>
+

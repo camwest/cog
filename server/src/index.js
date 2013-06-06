@@ -2,7 +2,8 @@ var express = require('express')
   , mongoose = require('mongoose')
   , app = express()
   , cog = require('./controllers/cog')
-  , sites = require('./controllers/sites');
+  , sites = require('./controllers/sites')
+  , auth = require('./controllers/auth');
 
 mongoose.connect('mongodb://localhost/cog');
 
@@ -22,11 +23,15 @@ app.use(function(err, req, res, next) {
   res.send(500, 'Oops!');
 });
 
+
 // COG: Sites
 app.get('/sites/new', sites.build);
 app.post('/sites', sites.create);
 app.get('/sites/:id', sites.show);
 app.put('/sites/:id', sites.put);
+
+// COG: Authentication
+app.post('/sites/:id/auth', auth.create);
 
 // COG: Client Resources
 app.get('/cog.js', cog.js);

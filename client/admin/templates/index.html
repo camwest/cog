@@ -1,22 +1,6 @@
-<div class="admin" ng-controller="AdminCtrl" ng-hide="site.loading">
-  <form name="admin" novalidate>
-  <h1>Admin</h1>
-
-  <div class="dirty-nav" ng-show="admin.$dirty">
-    <button ng-click="save()" ng-hide="saving">Save</button>
-    <span ng-show="saving">Saving...</span>
-  </div>
-
-  <div class="admin-container">
-    <h2>Sections</h2>
-
-    <div ng-repeat="section in site.sections">
-      <h3>{{ section.label }}</h3>
-
-      <p ng-repeat="field in section.fields">
-        <label>{{ field.label }}</label> <input type="text" ng-model="field.value" />
-      </p>
-    </div>
-  </div>
+<div class="admin" ng-controller="AdminCtrl" ng-class="{ visible: adminVisible }">
+  <a ng-click="hideAdmin()">X</a>
+  <p ng-show="validationMessage">{{ validationMessage }}</p>
+  <ng-include src="getTemplate()" ng-hide="validating"></ng-include>
+  <p ng-show="validating">Validating...</p>
 </div>
-

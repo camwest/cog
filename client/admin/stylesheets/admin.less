@@ -1,4 +1,5 @@
 .admin {
+  display: none;
   position: fixed;
   height: 250px;
   bottom: 0;
@@ -8,6 +9,10 @@
   color: white;
   overflow: auto;
   padding: 10px;
+
+  &.visible {
+    display: block;
+  }
 
   .dirty-nav {
     position: absolute;

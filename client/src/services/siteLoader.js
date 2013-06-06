@@ -9,8 +9,6 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
     client.loading = true;
 
     $http.get(url).then(function(resp) {
-      console.log('cog: site loaded');
-
       server.sections = resp.data;
 
       waitingForLoad.forEach(function(defer) {
