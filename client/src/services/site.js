@@ -1,5 +1,6 @@
 angular.module('cog').factory('Site', function() {
   function SectionPresenter(section) {
+    this.section = section;
     this.label = section.label;
     this.fields = section.fields;
   }
@@ -39,6 +40,10 @@ angular.module('cog').factory('Site', function() {
       }
 
       return field;
+    },
+
+    setElement: function(element) {
+      this.section.element = element;
     }
   };
 
@@ -94,6 +99,16 @@ angular.module('cog').factory('Site', function() {
 
     findOrCreateSection: function(sectionLabel) {
       return this.findSection(sectionLabel) || this.createSection(sectionLabel);
+    },
+
+    sectionJson: function() {
+      var sections = [];
+
+      this.sections.forEach(function(section) {
+        sections.push( { label: section.label, fields: section.fields } );
+      });
+
+      return sections;
     }
   };
 

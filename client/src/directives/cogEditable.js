@@ -3,7 +3,9 @@ angular.module('cog').directive('cogEditable', ['SiteLoader', function(SiteLoade
     restrict: 'A',
     scope: {},
     link: function(scope, element, attrs) {
-      SiteLoader.tFunc(attrs.cogEditable).then(function(t) {
+      var rawElement = element[0];
+
+      SiteLoader.tFunc(rawElement, attrs.cogEditable).then(function(t) {
         scope.t = t;
       });
     }

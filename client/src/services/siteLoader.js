@@ -41,14 +41,19 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
     },
 
     save: function() {
-      return $http.put(url, { sections: client.sections }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
+      return $http.put(url, { sections: client.sectionJson() }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
-    tFunc: function(sectionLabel, callback) {
+    tFunc: function(sectionElement, sectionLabel, callback) {
       var defer = $q.defer();
 
       this.load().then(function() {
         var section = client.findOrCreateSection(sectionLabel);
+
+        // pass in the sectionElement so
+        // we can sort on element order later on once
+        // everything is loaded
+        section.setElement(sectionElement);
 
         defer.resolve(function(fieldLabel) {
           var field = findOrCreateField(section, fieldLabel);

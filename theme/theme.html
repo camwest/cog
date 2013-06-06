@@ -9,6 +9,8 @@
 <body>
   <cog admin>Launch Admin</cog>
 
+  <cog include="header"></cog>
+
   <div class="content" cog-editable="about">
     <p>{{ t('string1') }}</p>
     <p>{{ t('string2') }}</p>
@@ -21,8 +23,7 @@
     <p>{{ t('Featured News: Body') }}</p>
   </div>
 
-  <div cog-editable="footer">
-    <p>&copy; Copyright {{ t('copyright') }}</p>
-  </div>
+  <cog include="footer"></cog>
+
 </body>
 </html>

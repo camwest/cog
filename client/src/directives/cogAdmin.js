@@ -2,11 +2,11 @@ angular.module('cog').directive('admin', ['$rootScope', function($rootScope) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      $rootScope.adminVisible = localStorage.getItem('cog:adminVisible') === 'true' ? true : false;
-
       if (element.prop('tagName') !== 'COG') {
         return;
       }
+
+      $rootScope.adminVisible = localStorage.getItem('cog:adminVisible') === 'true' ? true : false;
 
       element.on('click', function() {
         $rootScope.$apply(function() {

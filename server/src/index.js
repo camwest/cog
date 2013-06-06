@@ -18,6 +18,7 @@ app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 app.use(express.bodyParser());
 app.use('/client/admin', express.static(__dirname + '/../../client/admin/templates'));
+app.use('/includes', express.static(__dirname + '/../../theme/includes'));
 
 app.use(function(err, req, res, next) {
   console.log(err.stack);
