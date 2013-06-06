@@ -4,6 +4,8 @@ var fse = require('fs.extra')
   , async = require('async');
 
 function concatFiles(options, callback) {
+  var eachFile = options.eachFile || function(f) { return f; };
+
   async.map(options.paths, readFiles, combineFiles);
 
   function readFiles(dir, callback) {
@@ -22,7 +24,7 @@ function concatFiles(options, callback) {
             callback(err);
           }
 
-          combinedData += data;
+          combinedData += eachFile(data, filepath);
           next();
         });
       } else {

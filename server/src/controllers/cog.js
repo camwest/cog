@@ -1,5 +1,6 @@
 var buildJs = require('../../lib/buildJs')
   , buildCss = require('../../lib/buildCss')
+  , buildThemeHtml = require('../../lib/buildThemeHtml')
   , fs = require('fs');
 
 function js(req, res) {
@@ -26,13 +27,16 @@ function css(req, res) {
 }
 
 function index(req, res) {
+  res.type('.html');
+
   fs.readFile(__dirname + '/../../../theme/theme.html', function(err, html) {
     if (err) {
       throw err;
     }
 
-    res.type('.html');
-    res.send(html);
+    buildThemeHtml(function(err, otherHtml) {
+      res.send(html + otherHtml);
+    });
   });
 }
 
