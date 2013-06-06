@@ -34,7 +34,7 @@ angular.module('cog').factory('Admin', ['$http', 'cogSettings', '$rootScope', fu
     },
 
     logout: function() {
-      localStorage.removeItem('cog:token');
+      localStorage.removeItem('cog:user');
       templateUrl = '/client/admin/logged_out.html';
     }
   };
