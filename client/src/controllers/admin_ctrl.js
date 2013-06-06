@@ -14,8 +14,4 @@ angular.module('cog').controller('AdminCtrl', ['$scope', 'Admin', function($scop
       $scope.validationMessage = message;
     }
   };
-
-  $scope.logout = function() {
-    Admin.logout();
-  };
 }]);

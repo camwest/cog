@@ -1,6 +1,14 @@
 var User = require('./models').User
   , bcrypt = require('bcrypt');
 
+
+function clientUser(user) {
+  return {
+    username: user.username,
+    token: user.token
+  };
+}
+
 module.exports = {
   login: function(credentials, callback) {
     User.findOne({ siteId: credentials.siteId, username: credentials.username }, function(err, user) {
@@ -21,7 +29,13 @@ module.exports = {
           callback('Invalid credentials');
         }
 
-        user.newToken(callback);
+        user.newToken(function(err) {
+          if (err) {
+            callback(err);
+          }
+
+          callback(null, clientUser(user));
+        });
       });
     });
   }

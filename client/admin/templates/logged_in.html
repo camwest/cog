@@ -1,6 +1,6 @@
 <div ng-controller="LoggedInAdminCtrl">
   <form name="admin" novalidate>
-    <h1>Admin</h1>
+    <h1>Admin ({{ username }})</h1>
     <a ng-click="logout()">Logout</a>
 
     <div class="dirty-nav" ng-show="admin.$dirty">
