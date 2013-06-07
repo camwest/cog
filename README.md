@@ -39,7 +39,7 @@ The most basic feature in Cog is editable fields. See the below example.
 
 ```html
 <!doctype html>
-<html cog-cms="1234567890">
+<html cog-cms>
   <head>
     <link rel="stylesheet" type="text/css" href="/cog.css" ></link>
     <script src="/cog.js"></script>

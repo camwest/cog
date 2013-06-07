@@ -1,0 +1,21 @@
+<h1>Install Cog</h1>
+
+<form method="POST" action="/install">
+
+  <h2>Enter your mongodb url</h2>
+  <p>
+    <input name="install[mongourl]" type="text" placeholder="mongodb://localhost/cog" required>
+  </p>
+
+  <h2>Create your username and password</h2>
+  <p>
+    <input name="install[user][username]" type="text" placeholder="username" required>
+    <input name="install[user][password]" type="password" placeholder="password" required>
+  </p>
+
+  <p>
+    <input type="submit" value="create site">
+  </p>
+</form>
+
+<script>localStorage.clear()</script>

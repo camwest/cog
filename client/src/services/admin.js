@@ -1,6 +1,6 @@
-angular.module('cog').factory('Admin', ['$http', 'cogSettings', '$rootScope', function($http, cogSettings, $rootScope) {
+angular.module('cog').factory('Admin', ['$http', '$rootScope', function($http, $rootScope) {
   var scope = $rootScope.$new();
-  var url = '/sites/' + cogSettings.site + '/auth';
+  var url = '/site/auth';
   var user = angular.fromJson(localStorage.getItem('cog:user'));
   var templateUrl;
 

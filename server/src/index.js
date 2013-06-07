@@ -1,19 +1,13 @@
 var express = require('express')
-  , mongoose = require('mongoose')
   , app = express()
-  , cog = require('./controllers/cog')
+  , cog = require('./services/cog')
+  , install = require('./controllers/install')
+  , static = require('./controllers/static')
   , sites = require('./controllers/sites')
   , auth = require('./controllers/auth');
 
-mongoose.connect('mongodb://localhost/cog');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Connected to mongo');
-});
-
 app.use(express.logger());
+app.use(cog.requireInstall());
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 app.use(express.bodyParser());
@@ -25,23 +19,25 @@ app.use(function(err, req, res, next) {
   res.send(500, 'Oops!');
 });
 
+// COG: Installation
+app.get('/install/new', install.new);
+app.post('/install', install.create);
+
 // COG: Sites
-app.get('/sites/new', sites.build);
-app.post('/sites', sites.create);
-app.get('/sites/:id', sites.show);
-app.put('/sites/:id', auth.editorRequired, sites.put);
+app.get('/site', sites.show);
+app.put('/site', auth.editorRequired, sites.put);
 
 // COG: Authentication
-app.post('/sites/:id/auth', auth.create);
+app.post('/site/auth', auth.create);
 
 // COG: Client Resources
-app.get('/cog.js', cog.js);
-app.get('/cog.css', cog.css);
+app.get('/cog.js', static.js);
+app.get('/cog.css', static.css);
 app.get('/pages/*', function(req, res) {
   res.send(200, 'Sorry. The page cannot be displayed!');
 });
 
-app.get('*', cog.index);
+app.get('*', static.index);
 
 var port = process.env.PORT || 5000;
 

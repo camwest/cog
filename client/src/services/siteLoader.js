@@ -1,5 +1,5 @@
-angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site', 'Admin', function(cogSettings, $http, $q, Site, Admin) {
-  var url = "/sites/" + cogSettings.site;
+angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', function($http, $q, Site, Admin) {
+  var url = "/site";
   var server = new Site();
 
   var waitingForLoad = [];
