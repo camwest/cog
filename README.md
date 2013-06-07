@@ -34,9 +34,8 @@ The most basic feature in Cog is editable fields. See the below example.
 </html>
 ```
 
-This is a fully working example. By declaring the div as a
-```greeting```
-section and putting the ```name``` field inside it, the admin interface
+This is a fully working example. By declaring the div as a greeting
+section and putting the name field inside it, the admin interface
 will automatically be generated to look like this:
 
 ![cog-editable
