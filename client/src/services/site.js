@@ -6,6 +6,10 @@ angular.module('cog').factory('Site', function() {
   }
 
   SectionPresenter.prototype = {
+    findOrCreateField: function(label) {
+      return this.findField(label) || this.createField(label);
+    },
+
     findField: function(label) {
       var match;
 
@@ -18,28 +22,16 @@ angular.module('cog').factory('Site', function() {
       return match;
     },
 
-    addField: function(field) {
-      this.fields.push(field);
-    },
-
     createField: function(fieldLabel) {
       var field = { label: fieldLabel, value: '' };
 
-      this.addField(field);
+      this._addField(field);
 
       return field;
     },
 
-    copy: function(site, fieldLabel) {
-      var field = site.findField(this.label, fieldLabel);
-
-      if (field) {
-        this.addField(field);
-      } else {
-        field = this.createField(fieldLabel);
-      }
-
-      return field;
+    _addField: function(field) {
+      this.fields.push(field);
     },
 
     setElement: function(element) {
@@ -80,17 +72,6 @@ angular.module('cog').factory('Site', function() {
 
     _addSection: function(section) {
       this.sections.push(section);
-    },
-
-    findField: function(sectionLabel, fieldLabel) {
-      var section = this.findSection(sectionLabel)
-        , match;
-
-      if (section) {
-        match = section.findField(fieldLabel);
-      }
-
-      return match;
     },
 
     isLoaded: function() {

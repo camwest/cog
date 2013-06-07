@@ -37,6 +37,10 @@ app.post('/sites/:id/auth', auth.create);
 // COG: Client Resources
 app.get('/cog.js', cog.js);
 app.get('/cog.css', cog.css);
+app.get('/pages/*', function(req, res) {
+  res.send(200, 'Sorry. The page cannot be displayed!');
+});
+
 app.get('*', cog.index);
 
 var port = process.env.PORT || 5000;

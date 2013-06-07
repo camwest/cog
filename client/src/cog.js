@@ -1,7 +1,14 @@
 var cog = angular.module('cog', []);
 
-cog.config(['$provide', function($provide) {
+cog.config(['$provide', '$routeProvider', '$locationProvider', function($provide, $routeProvider, $locationProvider) {
   $provide.constant('cogSettings', window.cog);
+  $locationProvider.html5Mode(true);
+
+  $routeProvider
+    .otherwise({
+      controller: 'RuntimeRoutesCtrl',
+      template: '[dynamic]'
+    });
 }]);
 
 cog.run(function() {

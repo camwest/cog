@@ -1,27 +1,22 @@
 angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site', 'Admin', function(cogSettings, $http, $q, Site, Admin) {
   var url = "/sites/" + cogSettings.site;
   var server = new Site();
-  var client = new Site();
 
   var waitingForLoad = [];
 
   function loadSite() {
-    client.loading = true;
+    server.loading = true;
 
     $http.get(url).then(function(resp) {
       server.sections = resp.data;
 
       waitingForLoad.forEach(function(defer) {
-        defer.resolve(client);
+        defer.resolve(server);
       });
 
       waitingForLoad = [];
-      client.loading = false;
+      server.loading = false;
     });
-  }
-
-  function findOrCreateField(clientSection, fieldLabel) {
-    return clientSection.findField(fieldLabel) || clientSection.copy(server, fieldLabel);
   }
 
   return {
@@ -29,8 +24,8 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
       var defer = $q.defer();
 
       if (server.isLoaded()) {
-        defer.resolve(client);
-      } else if (client.loading) {
+        defer.resolve(server);
+      } else if (server.loading) {
         waitingForLoad.push(defer);
       } else {
         waitingForLoad.push(defer);
@@ -41,14 +36,14 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
     },
 
     save: function() {
-      return $http.put(url, { sections: client.sectionJson() }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
+      return $http.put(url, { sections: server.sectionJson() }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
     tFunc: function(sectionElement, sectionLabel, callback) {
       var defer = $q.defer();
 
       this.load().then(function() {
-        var section = client.findOrCreateSection(sectionLabel);
+        var section = server.findOrCreateSection(sectionLabel);
 
         // pass in the sectionElement so
         // we can sort on element order later on once
@@ -56,7 +51,7 @@ angular.module('cog').factory('SiteLoader', ['cogSettings', '$http', '$q', 'Site
         section.setElement(sectionElement);
 
         defer.resolve(function(fieldLabel) {
-          var field = findOrCreateField(section, fieldLabel);
+          var field = section.findOrCreateField(fieldLabel);
 
           return field.value;
         });
