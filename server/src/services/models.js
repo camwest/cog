@@ -12,7 +12,8 @@ var sectionSchema = Schema({
 
 var fieldSchema = Schema({
   label: String,
-  value: String
+  value: String,
+  type: String
 });
 
 var userSchema = Schema({

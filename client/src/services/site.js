@@ -6,24 +6,29 @@ angular.module('cog').factory('Site', function() {
   }
 
   SectionPresenter.prototype = {
-    findOrCreateField: function(label) {
-      return this.findField(label) || this.createField(label);
+    findOrCreateField: function(label, type) {
+      if (!type) {
+        throw 'must supply a type';
+      }
+
+      return this.findField(label, type) || this.createField(label, type);
     },
 
-    findField: function(label) {
+    findField: function(label, type) {
       var match;
 
       this.fields.forEach(function(field) {
         if (field.label === label) {
           match = field;
+          match.type = type;
         }
       });
 
       return match;
     },
 
-    createField: function(fieldLabel) {
-      var field = { label: fieldLabel, value: '' };
+    createField: function(fieldLabel, type) {
+      var field = { label: fieldLabel, value: '', type: type };
 
       this._addField(field);
 

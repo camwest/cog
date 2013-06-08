@@ -50,11 +50,22 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', fun
         // everything is loaded
         section.setElement(sectionElement);
 
-        defer.resolve(function(fieldLabel) {
-          var field = section.findOrCreateField(fieldLabel);
+        function templateFn(fieldLabel, type) {
+          if (!type) {
+            type = 'text';
+          }
+
+          var field = section.findOrCreateField(fieldLabel, type);
 
           return field.value;
-        });
+        }
+
+        // specialized template functions
+        templateFn.markdown = function(fieldLabel) {
+          this(fieldLabel, 'markdown');
+        };
+
+        defer.resolve(templateFn);
       });
 
       return defer.promise;

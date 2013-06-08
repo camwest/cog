@@ -11,4 +11,13 @@ angular.module('cog').controller('LoggedInAdminCtrl', ['$scope', 'SiteLoader', '
       $scope.admin.$setPristine();
     });
   };
+
+  var supportedEditors = ['text', 'markdown'];
+  $scope.fieldEditorPath = function(type) {
+    if (supportedEditors.indexOf(type) === -1) {
+      throw type + ' is not a supported field type';
+    }
+
+    return '/client/admin/editors/' + type + '.html';
+  };
 }]);
