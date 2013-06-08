@@ -62,7 +62,7 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', fun
 
         // specialized template functions
         templateFn.markdown = function(fieldLabel) {
-          this(fieldLabel, 'markdown');
+          return this(fieldLabel, 'markdown');
         };
 
         defer.resolve(templateFn);
