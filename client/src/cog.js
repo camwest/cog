@@ -1,4 +1,4 @@
-var cog = angular.module('cog', []);
+var cog = angular.module('cog', ['ngSanitize']);
 
 cog.config(['$provide', '$routeProvider', '$locationProvider', function($provide, $routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
