@@ -1,4 +1,4 @@
-angular.module('cog').controller('LoggedInAdminCtrl', ['$scope', 'SiteLoader', 'Admin', function($scope, SiteLoader, Admin) {
+angular.module('cog').controller('LoggedInAdminCtrl', ['$scope', 'SiteLoader', 'Admin', 'FieldFormatters', function($scope, SiteLoader, Admin, FieldFormatters) {
   $scope.site = SiteLoader.load();
   $scope.username = Admin.getUsername();
   $scope.logout = Admin.logout;
@@ -12,9 +12,8 @@ angular.module('cog').controller('LoggedInAdminCtrl', ['$scope', 'SiteLoader', '
     });
   };
 
-  var supportedEditors = ['text', 'markdown'];
   $scope.fieldEditorPath = function(type) {
-    if (supportedEditors.indexOf(type) === -1) {
+    if (!FieldFormatters.isSupported(type)) {
       throw type + ' is not a supported field type';
     }
 

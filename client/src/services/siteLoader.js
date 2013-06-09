@@ -1,4 +1,4 @@
-angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', function($http, $q, Site, Admin) {
+angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'FieldFormatters', function($http, $q, Site, Admin, FieldFormatters) {
   var url = "/site";
   var server = new Site();
 
@@ -52,12 +52,12 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', fun
 
         function templateFn(fieldLabel, type) {
           if (!type) {
-            type = 'text';
+            type = FieldFormatters.defaultType;
           }
 
           var field = section.findOrCreateField(fieldLabel, type);
 
-          return field.value;
+          return field.formatted();
         }
 
         // specialized template functions
