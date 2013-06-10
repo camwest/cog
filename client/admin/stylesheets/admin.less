@@ -1,14 +1,18 @@
 .admin {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: none;
   position: fixed;
   height: 250px;
   bottom: 0;
   left: 0;
   right: 0;
-  background: black;
-  color: white;
-  overflow: auto;
-  padding: 10px;
+  background: white;
+
+  .admin-container {
+    overflow: auto;
+    height: 200px;
+    padding: 0 50px;
+  }
 
   &.visible {
     display: block;
@@ -18,8 +22,70 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: red;
-    padding: 10px;
+    background: #f05742;
+
+    .save-admin {
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      color: white;
+      line-height: 50px;
+      padding: 0 50px;
+      margin: 0;
+    }
   }
+
+  h1, h2, h3 {
+    font-weight: normal;
+  }
+
+  h1 {
+    font-size: 15px;
+    line-height: 50px;
+    color: #cccccc;
+    background-color: #272727;
+    margin-top: 0;
+    text-indent: 50px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .close-admin {
+    position: absolute;
+    top: 0;
+    line-height: 50px;
+    right: 50px;
+    cursor: pointer;
+  }
+
+  .logout-admin {
+    position: absolute;
+    right: 83px;
+    top: 0;
+    font-size: 12px;
+    line-height: 50px;
+    cursor: pointer;
+  }
+}
+
+.section-header {
+  font-size: 15px;
+  color: #f05742;
+  text-transform: uppercase;
+}
+
+.field_editor {
+  padding: 10px 0;
+}
+
+.editor_markdown {
+  .editor {
+    display: block;
+  }
+
+  margin-bottom: 10px;
 }
 

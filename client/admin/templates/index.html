@@ -1,5 +1,5 @@
 <div class="admin" ng-controller="AdminCtrl" ng-class="{ visible: adminVisible }">
-  <a ng-click="hideAdmin()">X</a>
+  <a class="close-admin" ng-click="hideAdmin()">&times;</a>
   <p ng-show="validationMessage">{{ validationMessage }}</p>
   <ng-include src="getTemplate()" ng-hide="validating"></ng-include>
   <p ng-show="validating">Validating...</p>

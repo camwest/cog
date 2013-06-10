@@ -1,21 +1,20 @@
 <div ng-controller="LoggedInAdminCtrl">
+  <a class="logout-admin" ng-click="logout()">Logout</a>
+
   <form name="admin" novalidate>
     <h1>Admin ({{ username }})</h1>
-    <a ng-click="logout()">Logout</a>
 
     <div class="dirty-nav" ng-show="admin.$dirty">
-      <button ng-click="save()" ng-hide="saving">Save</button>
+      <button class="save-admin" ng-click="save()" ng-hide="saving">Save</button>
       <span ng-show="saving">Saving...</span>
     </div>
 
     <div class="admin-container">
-      <h2>Sections</h2>
-
       <div ng-repeat="section in site.sections | sectionVisible | elementOrder">
-        <h3>{{ section.label }}</h3>
+        <h3 class="section-header">{{ section.label }}</h3>
 
         <div ng-repeat="field in section.fields">
-          <div ng-include="fieldEditorPath(field.type)" class="editor_{{ field.type }}"></div>
+          <div ng-include="fieldEditorPath(field.type)" class="field_editor editor_{{ field.type }}"></div>
         </div>
       </div>
     </div>
