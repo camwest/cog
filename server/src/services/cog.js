@@ -4,7 +4,6 @@ var mongoose = require('mongoose')
   , site = require('./site')
   , async = require('async');
 
-var CONFIG_PATH = path.normalize(__dirname + '../../../../.cog.json');
 var connection;
 
 function requireInstall() {
@@ -15,47 +14,48 @@ function requireInstall() {
       return next();
     }
 
-    async.waterfall([ loadConfig, parseJson, verifyConnection, fetchSite ], installVerified(req, next));
+    async.waterfall([ loadConfig, verifyConnection, verifySite], installVerified(req, res, next));
   };
 }
 
 function loadConfig(callback) {
-  fs.readFile(CONFIG_PATH, callback);
+  if (process.env.MONGO_URL) {
+    callback(null, process.env.MONGO_URL);
+  } else {
+    callback('MONGO_URL not specified in .env');
+  }
 }
 
-function parseJson(file, callback) {
-  var install = JSON.parse(file);
-  callback(null, install);
-}
+function verifyConnection(mongoUrl, callback) {
+  console.log('connecting to', mongoUrl);
 
-function verifyConnection(install, callback) {
-  connect(install.mongourl, function(err) {
+  connect(mongoUrl, function(err) {
     if (err) {
       return callback(err);
     }
 
-    callback(null, install);
+    console.log('connected successfully');
+    callback();
   });
 }
 
-function fetchSite(install, callback) {
-  site.fetch(install.siteId, callback);
+function verifySite(callback) {
+  site.exists(callback);
 }
 
-function installVerified(req, next) {
-  return function(err, site) {
+function installVerified(req, res, next) {
+  return function(err, currentSite) {
     if (err) {
-      return res.redirect('/install/new');
+      if (err === site.NO_SITE) {
+        return res.redirect('/install/new');
+      } else {
+        return res.send(200, err);
+      }
     }
 
-    req.site = site;
+    req.site = currentSite;
     next();
   };
-}
-
-function saveInstall(install, callback) {
-  var json = JSON.stringify(install);
-  fs.writeFile(CONFIG_PATH, json, callback);
 }
 
 function connect(dbConn, callback) {
@@ -80,6 +80,5 @@ function connect(dbConn, callback) {
 
 module.exports = {
   requireInstall: requireInstall,
-  saveInstall: saveInstall,
   connect: connect,
 };
