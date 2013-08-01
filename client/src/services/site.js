@@ -40,16 +40,6 @@ angular.module('cog').factory('Site', ['SectionPresenter', function(SectionPrese
 
     findOrCreateSection: function(sectionLabel) {
       return this.findSection(sectionLabel) || this.createSection(sectionLabel);
-    },
-
-    sectionJson: function() {
-      var sections = [];
-
-      this.sections.forEach(function(section) {
-        sections.push( { label: section.label, fields: section.fields } );
-      });
-
-      return sections;
     }
   };
 

@@ -1,21 +1,21 @@
-angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'FieldFormatters', function($http, $q, Site, Admin, FieldFormatters) {
+angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'SiteSerializer', function($http, $q, Site, Admin, SiteSerializer) {
   var url = "/site";
-  var server = new Site();
+  var site = new Site();
 
   var waitingForLoad = [];
 
   function loadSite() {
-    server.loading = true;
+    site.loading = true;
 
     $http.get(url).then(function(resp) {
-      server.sections = resp.data;
+      site.sections = resp.data;
 
       waitingForLoad.forEach(function(defer) {
-        defer.resolve(server);
+        defer.resolve(site);
       });
 
       waitingForLoad = [];
-      server.loading = false;
+      site.loading = false;
     });
   }
 
@@ -23,9 +23,9 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'Fi
     load: function() {
       var defer = $q.defer();
 
-      if (server.isLoaded()) {
-        defer.resolve(server);
-      } else if (server.loading) {
+      if (site.isLoaded()) {
+        defer.resolve(site);
+      } else if (site.loading) {
         waitingForLoad.push(defer);
       } else {
         waitingForLoad.push(defer);
@@ -36,14 +36,14 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'Fi
     },
 
     save: function() {
-      return $http.put(url, { sections: server.sectionJson() }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
+      return $http.put(url, { sections: SiteSerializer.toJson(site) }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
     fetchSection: function(sectionElement, sectionLabel) {
       var defer = $q.defer();
 
       this.load().then(function() {
-        var section = server.findOrCreateSection(sectionLabel);
+        var section = site.findOrCreateSection(sectionLabel);
         section.setElement(sectionElement);
 
         defer.resolve(section);
