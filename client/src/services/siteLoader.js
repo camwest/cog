@@ -39,33 +39,14 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'Fi
       return $http.put(url, { sections: server.sectionJson() }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
-    tFunc: function(sectionElement, sectionLabel, callback) {
+    fetchSection: function(sectionElement, sectionLabel) {
       var defer = $q.defer();
 
       this.load().then(function() {
         var section = server.findOrCreateSection(sectionLabel);
-
-        // pass in the sectionElement so
-        // we can sort on element order later on once
-        // everything is loaded
         section.setElement(sectionElement);
 
-        function templateFn(fieldLabel, type) {
-          if (!type) {
-            type = FieldFormatters.defaultType;
-          }
-
-          var field = section.findOrCreateField(fieldLabel, type);
-
-          return field.formatted();
-        }
-
-        // specialized template functions
-        templateFn.markdown = function(fieldLabel) {
-          return this(fieldLabel, 'markdown');
-        };
-
-        defer.resolve(templateFn);
+        defer.resolve(section);
       });
 
       return defer.promise;

@@ -8,7 +8,7 @@ angular.module('cog').factory('FieldPresenter', ['FieldFormatters', function(for
 
   FieldPresenter.prototype = {
     formatted: function() {
-      return formatters[this.type](this.value);
+      return formatters[this.type](this.field.value);
     }
   };
 

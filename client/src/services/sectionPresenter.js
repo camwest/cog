@@ -6,12 +6,14 @@ angular.module('cog').factory('SectionPresenter', ['FieldPresenter', function(Fi
   }
 
   SectionPresenter.prototype = {
-    findOrCreateField: function(label, type) {
+    findOrCreateField: function(element, label, type) {
       if (!type) {
         throw 'must supply a type';
       }
 
       var field = this.findField(label, type) || this.createField(label, type);
+
+      field.element = element;
 
       return new FieldPresenter(field);
     },
