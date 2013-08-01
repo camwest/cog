@@ -35,11 +35,6 @@ module.exports = {
     });
   },
 
-  //TODO: refactor
-  fetch: function(siteId, callback) {
-    Site.findById(siteId, callback);
-  },
-
   update: function(siteId, update, callback) {
     Site.findOneAndUpdate({ _id: siteId }, update, callback);
   },
