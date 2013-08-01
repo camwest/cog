@@ -1,8 +1,14 @@
+@admin-height: 250px;
+
+body.adminVisible {
+  margin-bottom: @admin-height + 25px;
+}
+
 .admin {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: none;
   position: fixed;
-  height: 250px;
+  height: @admin-height;
   bottom: 0;
   left: 0;
   right: 0;
