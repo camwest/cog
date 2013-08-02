@@ -11,11 +11,13 @@ angular.module('cog').directive('html', ['Template', '$rootScope', function(Temp
       $rootScope.showAdmin = function() {
         $rootScope.adminVisible = true;
         localStorage.setItem('cog:adminVisible', 'true');
+        $('body').addClass('adminVisible');
       };
 
       $rootScope.hideAdmin = function() {
         localStorage.setItem('cog:adminVisible', 'false');
         $rootScope.adminVisible = false;
+        $('body').removeClass('adminVisible');
       };
 
       key('c+o+g', function() {
