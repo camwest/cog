@@ -36,7 +36,9 @@ angular.module('cog').factory('SiteLoader', ['$http', '$q', 'Site', 'Admin', 'Si
     },
 
     save: function() {
-      return $http.put(url, { sections: SiteSerializer.toJson(site) }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
+      var json = SiteSerializer.toJson(site);
+
+      return $http.put(url, { sections: json }, { headers: Admin.getHeaders() }).error(Admin.httpError('Error saving'));
     },
 
     fetchSection: function(sectionElement, sectionLabel) {

@@ -7,7 +7,8 @@ var siteSchema = Schema({
 
 var sectionSchema = Schema({
   label: String,
-  fields: [fieldSchema]
+  fields: [fieldSchema],
+  sections: [sectionSchema]
 });
 
 var fieldSchema = Schema({

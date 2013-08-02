@@ -1,7 +1,9 @@
-angular.module('cog').directive('html', ['Template', '$rootScope', function(Template, $rootScope) {
+angular.module('cog').directive('html', ['Template', '$rootScope', 'SiteLoader', function(Template, $rootScope, SiteLoader) {
   return {
     restrict: 'E',
     link: function(scope, element, attrs) {
+      scope.cogSection = SiteLoader;
+
       Template.link('/client/admin/index.html', scope).then(function(view) {
         element.find('body').append(view);
       });

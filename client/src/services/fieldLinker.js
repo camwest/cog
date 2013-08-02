@@ -7,9 +7,7 @@ angular.module('cog').factory('FieldLinker', ['$sanitize', function($sanitize) {
         return;
       }
 
-      scope.cogSection.then(function(section) {
-        scope.cogField = section.findOrCreateField(rawElement, fieldLabel, fieldType);
-      });
+      scope.cogField = scope.cogSection.findOrCreateField(rawElement, fieldLabel, fieldType);
     });
 
     scope.$watch('cogField.formatted()', function() {

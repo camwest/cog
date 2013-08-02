@@ -1,0 +1,14 @@
+<div class="admin-section">
+  <h3 class="section-header">{{ item.label }}</h3>
+
+  <div ng-repeat="item in item.items() | elementVisible | elementOrder">
+    <div ng-switch="item._type">
+      <div ng-switch-when="field">
+        <div ng-include="fieldEditorPath(item.type)" class="field_editor editor_{{ item.type }}"></div>
+      </div>
+      <div ng-switch-when="section">
+        <ng-include src="sectionPath()"></ng-include>
+      </div>
+    </div>
+  </div>
+</div>

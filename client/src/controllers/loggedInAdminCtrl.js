@@ -12,6 +12,10 @@ angular.module('cog').controller('LoggedInAdminCtrl', ['$scope', 'SiteLoader', '
     });
   };
 
+  $scope.sectionPath = function() {
+    return '/client/admin/section.html';
+  };
+
   $scope.fieldEditorPath = function(type) {
     if (!FieldFormatters.isSupported(type)) {
       throw type + ' is not a supported field type';

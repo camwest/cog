@@ -9,7 +9,23 @@ angular.module('cog').directive('cogSection', ['SiteLoader', function(SiteLoader
         }
 
         var rawElement = element[0];
-        scope.cogSection = SiteLoader.fetchSection(rawElement, sectionName);
+
+        var unwatch = scope.$watch('cogSection', function(section) {
+
+          if (!section) {
+            return;
+          }
+
+          unwatch();
+          console.log('cogSection was set', sectionName);
+
+          var parent = scope.cogSection;
+          scope.cogSection = null;
+
+          parent.fetchSection(rawElement, sectionName).then(function(section) {
+            scope.cogSection = section;
+          });
+        });
       });
     }
   };

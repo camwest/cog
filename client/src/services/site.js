@@ -15,7 +15,7 @@ angular.module('cog').factory('Site', ['SectionPresenter', function(SectionPrese
       });
 
       if (match) {
-        match = new SectionPresenter(match);
+        match = new SectionPresenter(Site, match);
       }
 
       return match;
@@ -23,7 +23,7 @@ angular.module('cog').factory('Site', ['SectionPresenter', function(SectionPrese
 
     // creates a section and returns it
     createSection: function(label) {
-      var section = { label: label, fields: [] };
+      var section = { label: label, fields: [], sections: [] };
 
       this._addSection(section);
 

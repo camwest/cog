@@ -78,10 +78,31 @@ body.adminVisible {
 }
 
 .section-header {
-  font-size: 15px;
   color: #f05742;
   text-transform: uppercase;
 }
+
+.admin-section {
+  .section-header {
+    font-size: 15px;
+  }
+
+  .admin-section {
+    border-left: solid 5px grey;
+    padding-left: 10px;
+
+    .section-header {
+      font-size: 13px;
+    }
+
+    .admin-section {
+      .section-header {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
 
 .field_editor {
   padding: 10px 0;
@@ -94,4 +115,3 @@ body.adminVisible {
 
   margin-bottom: 10px;
 }
-

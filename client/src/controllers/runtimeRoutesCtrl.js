@@ -5,5 +5,6 @@ angular.module('cog').controller('RuntimeRoutesCtrl', ['$rootScope', '$window', 
     pathName = '/index';
   }
 
+  $rootScope.currentPageName = pathName;
   $rootScope.currentPageUrl = '/pages' + pathName + '.html';
 }]);

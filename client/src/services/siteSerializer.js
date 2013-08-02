@@ -9,15 +9,23 @@ angular.module('cog').factory('SiteSerializer', function() {
     return stripped;
   }
 
+  function toJson(site) {
+    var sections = [];
+
+    site.sections.forEach(function(section) {
+      var obj = { label: section.label, fields: fieldsJson(section.fields) };
+
+      if (section.sections) {
+        obj.sections = toJson(section);
+      }
+
+      sections.push(obj);
+    });
+
+    return sections;
+  }
+
   return {
-    toJson: function(site) {
-      var sections = [];
-
-      site.sections.forEach(function(section) {
-        sections.push( { label: section.label, fields: fieldsJson(section.fields) } );
-      });
-
-      return sections;
-    }
+    toJson: toJson
   };
 });
