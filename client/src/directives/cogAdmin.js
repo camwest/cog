@@ -6,19 +6,11 @@ angular.module('cog').directive('admin', ['$rootScope', function($rootScope) {
         return;
       }
 
-      $rootScope.adminVisible = localStorage.getItem('cog:adminVisible') === 'true' ? true : false;
-
       element.on('click', function() {
         $rootScope.$apply(function() {
-          $rootScope.adminVisible = true;
-          localStorage.setItem('cog:adminVisible', 'true');
+          $rootScope.showAdmin();
         });
       });
-
-      $rootScope.hideAdmin = function() {
-        localStorage.setItem('cog:adminVisible', 'false');
-        $rootScope.adminVisible = false;
-      };
     }
   };
 }]);
